@@ -1,0 +1,16 @@
+name: Run tests
+run-name: ${{ github.actor }} Run of Pull Request Information
+
+on: [pull_request]
+
+jobs:
+  Pull-Request-Commits:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+      - run: git fetch
+      - run: git log origin/${{ github.event.pull_request.base.ref }}
